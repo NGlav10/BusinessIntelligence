@@ -1,9 +1,16 @@
 {
-    "extends": "@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
-        "jsx": "react",
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true
+      "allowJs": true,
+      "jsx": "react-native",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "moduleResolution": "node",
+      "noEmit": true,
+      "strict": true,
+      "target": "esnext",
+      "lib": ["es2017"],
     },
-    "include": ["screens"]
-}
+    "include": ["ts/"]
+  }
