@@ -1,7 +1,8 @@
 {
     "extends": "@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
-        "jsx": "react"
+        "jsx": "react",
+        "resolveJsonModule": true
     },
-    "include": ["screens/"]
+    "include": ["screens"]
 }
