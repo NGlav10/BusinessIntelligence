@@ -1,4 +1,4 @@
-import { Business } from '../sharedTypes';
+import { Business } from '../../sharedTypes';
 import data from '../../../data.json';
 import { useState } from 'react';
 

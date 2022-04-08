@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { theme, rgbaTheme } from '../../appTheme';
+import appTheme from '../../appTheme';
 
 interface Props {
   placeholder: string;
@@ -14,10 +14,15 @@ const SearchBar = (props: Props) => {
 
   return (
     <View style={styles.searchBar}>
-      <Icon name="search" size={20} color={theme.gray} style={{ width: 20 }} />
+      <Icon
+        name="search"
+        size={20}
+        color={appTheme.gray}
+        style={styles.searchIcon}
+      />
       <TextInput
         placeholder={placeholder}
-        onChangeText={(text) => props.setSearchText(text)}
+        onChangeText={(text) => setSearchText(text)}
         style={styles.searchText}
       />
     </View>
@@ -26,12 +31,15 @@ const SearchBar = (props: Props) => {
 
 const styles = StyleSheet.create({
   searchBar: {
-    backgroundColor: theme.lightGray,
+    backgroundColor: appTheme.lightGray,
     padding: 8,
     marginBottom: 5,
     borderRadius: 20,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  searchIcon: {
+    width: 20,
   },
   searchText: {
     fontSize: 18,

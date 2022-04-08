@@ -11,7 +11,7 @@ interface Location {
   country: string;
 }
 
-interface Revenue {
+export interface Revenue {
   seq: number;
   date: string;
   value: number;

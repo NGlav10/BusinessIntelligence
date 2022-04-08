@@ -1,24 +1,36 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import {
+  FlatList,
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Tile, SearchBar } from './components';
-import type { Business } from './sharedTypes';
+import type { Business } from '../sharedTypes';
 import { useFilteredBusinesses } from './utils/hooks';
-import { theme, rgbaTheme } from '../appTheme';
+import appTheme from '../appTheme';
+import { useNavigation } from '@react-navigation/native';
 
 const Businesses = () => {
+  const { navigate } = useNavigation();
   const { businesses, setSearchBusinessText } = useFilteredBusinesses();
 
   const _renderItem = ({ item }: { item: Business }) => (
     <Tile>
-      <View style={styles.listItemContainer}>
+      <TouchableOpacity
+        style={styles.listItemContainer}
+        onPress={() => {
+          navigate('Profile', { business: item });
+        }}>
         <View>
           <Text style={styles.businessName}>{item.name}</Text>
           <Text style={styles.city}>{item.location.city}</Text>
         </View>
-        <Icon name="angle-right" size={25} color={theme.blue} />
-      </View>
+        <Icon name="angle-right" size={25} color={appTheme.blue} />
+      </TouchableOpacity>
     </Tile>
   );
 
@@ -27,7 +39,7 @@ const Businesses = () => {
   );
 
   return (
-    <View style={{ backgroundColor: theme.white }}>
+    <>
       <View style={styles.searchBarContainer}>
         <Text style={styles.instruction}>
           Select a business to view it's revenue
@@ -41,20 +53,20 @@ const Businesses = () => {
         ItemSeparatorComponent={_renderItemSeparatorComponent}
         contentContainerStyle={styles.contentContainerStyle}
       />
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   businessName: {
     fontSize: 17,
-    color: theme.black,
+    color: appTheme.black,
   },
   contentContainerStyle: {
     padding: 8,
   },
   city: {
-    color: rgbaTheme('0.7').black,
+    color: appTheme.gray,
   },
   listItemContainer: {
     flexDirection: 'row',
@@ -64,7 +76,7 @@ const styles = StyleSheet.create({
   },
   instruction: {
     fontSize: 17,
-    color: theme.black,
+    color: appTheme.black,
     paddingBottom: 5,
   },
   itemSeparatorComponent: {
@@ -73,10 +85,10 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     padding: 8,
-    backgroundColor: theme.white,
-    borderBottomColor: theme.lightGray,
+    backgroundColor: appTheme.white,
+    borderBottomColor: appTheme.lightGray,
     borderBottomWidth: 1,
-    shadowColor: theme.black,
+    shadowColor: appTheme.black,
     textShadowOffset: { width: 0, height: -5 },
     shadowOpacity: 0.5,
   },

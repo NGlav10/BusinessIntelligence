@@ -1,20 +1,21 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { theme } from '../../appTheme';
+import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import appTheme from '../../appTheme';
 
 interface Props {
   children: ReactNode;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 const Tile = (props: Props) => (
-  <View style={styles.tile}>{props.children}</View>
+  <View style={[styles.tile, props.containerStyle]}>{props.children}</View>
 );
 
 const styles = StyleSheet.create({
   tile: {
-    backgroundColor: theme.white,
+    backgroundColor: appTheme.white,
     borderRadius: 8,
-    shadowColor: theme.black,
+    shadowColor: appTheme.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
   },
