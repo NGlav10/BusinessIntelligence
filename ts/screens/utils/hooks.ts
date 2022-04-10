@@ -1,6 +1,6 @@
-import { Business } from '../../sharedTypes';
+import { Business, Revenue } from '../../sharedTypes';
 import data from '../../../data.json';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 interface ReturnType {
   businesses: Business[];
@@ -23,3 +23,19 @@ export const useFilteredBusinesses = (): ReturnType => {
     setSearchBusinessText,
   };
 };
+
+export const useConstructChartValues = (
+  revenueArray: Revenue[],
+): {
+  xValues: string[];
+  yValues: number[];
+} =>
+  useMemo(() => {
+    const xValues: string[] = [];
+    const yValues = revenueArray.map((revenue) => {
+      xValues.push(revenue.date);
+      return revenue.value;
+    });
+
+    return { xValues, yValues };
+  }, [revenueArray]);
