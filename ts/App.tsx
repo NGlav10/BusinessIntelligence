@@ -13,25 +13,34 @@ import 'react-native-gesture-handler';
 import Businesses from './screens/Businesses';
 import BusinessDetail from './screens/BusinessDetail';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import appTheme from './appTheme';
+import { colors } from './appTheme';
 import { StatusBar } from 'react-native';
 
 const MainNavigator = createStackNavigator();
 
 const App = () => {
-  StatusBar.setBarStyle('dark-content', true);
+  StatusBar.setBarStyle('light-content', true);
 
   return (
     <SafeAreaProvider>
       <NavigationContainer
         theme={{
           ...DefaultTheme,
+          dark: true,
           colors: {
             ...DefaultTheme.colors,
-            primary: appTheme.blue,
+            primary: colors.white,
+            text: colors.white,
+            card: colors.black,
           },
         }}>
-        <MainNavigator.Navigator>
+        <MainNavigator.Navigator
+          screenOptions={{
+            headerStyle: {
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+          }}>
           <MainNavigator.Screen name="Home" component={Businesses} />
           <MainNavigator.Screen name="Profile" component={BusinessDetail} />
         </MainNavigator.Navigator>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import appTheme from '../../appTheme';
+import { colors } from '../../appTheme';
 
 interface Props {
   placeholder: string;
@@ -17,13 +17,15 @@ const SearchBar = (props: Props) => {
       <Icon
         name="search"
         size={20}
-        color={appTheme.gray}
+        color={colors.gray}
         style={styles.searchIcon}
       />
       <TextInput
         placeholder={placeholder}
+        placeholderTextColor={colors.gray}
         onChangeText={(text) => setSearchText(text)}
         style={styles.searchText}
+        autoCorrect={false}
       />
     </View>
   );
@@ -31,7 +33,7 @@ const SearchBar = (props: Props) => {
 
 const styles = StyleSheet.create({
   searchBar: {
-    backgroundColor: appTheme.lightGray,
+    backgroundColor: colors.lightGray,
     padding: 8,
     marginBottom: 5,
     borderRadius: 20,
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
   searchText: {
     fontSize: 18,
     marginLeft: 5,
+    color: colors.black,
   },
 });
 export default SearchBar;

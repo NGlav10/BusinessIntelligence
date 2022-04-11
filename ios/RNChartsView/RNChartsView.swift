@@ -17,7 +17,7 @@ class RNChartsView: UIView {
   func formatChart() {
     chartView.legend.enabled = false
     chartView.minOffset = 0
-    chartView.extraTopOffset = 15
+    chartView.extraTopOffset = 10
     chartView.animate(yAxisDuration: 1.0)
   }
   
@@ -30,13 +30,9 @@ class RNChartsView: UIView {
   func formatLeftAxis() {
     let leftAxis = chartView.leftAxis
     leftAxis.axisMinimum = 0
-    
-    let currencyFormatter = NumberFormatter()
-    currencyFormatter.numberStyle = .currency
-    currencyFormatter.minimumFractionDigits = 0
-    currencyFormatter.positiveSuffix = "M"
-    leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: currencyFormatter)
+    leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: getCurrencyFormatter())
     leftAxis.labelFont = UIFont(name: "AppleSDGothicNeo-Light", size: 10.0)!
+    leftAxis.labelTextColor = .black
   }
   
   func formatXAxis() {
@@ -46,6 +42,8 @@ class RNChartsView: UIView {
     xAxis.drawGridLinesEnabled = false
     xAxis.labelPosition = .bottom
     xAxis.labelFont = UIFont(name: "AppleSDGothicNeo-Light", size: 10.0)!
+    xAxis.avoidFirstLastClippingEnabled = true
+    xAxis.labelTextColor = .black
   }
   
   private func initializeChart() {
@@ -58,6 +56,8 @@ class RNChartsView: UIView {
     dataSet.highlightEnabled = false
     dataSet.colors = ChartColorTemplates.pastel()
     dataSet.valueFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 10.0)!
+    dataSet.valueTextColor = .black
+    dataSet.valueFormatter = DefaultValueFormatter(formatter: getCurrencyFormatter())
     
     formatChart()
     formatRightAxis()
@@ -85,4 +85,12 @@ func formatDate(dates: [String] ) -> [String] {
     let oldDate = oldDateFormatter.date(from: date)
     return dateFormatter.string(from: oldDate!).replacingOccurrences(of: " ", with: "\n")
   })
+}
+
+func getCurrencyFormatter() -> NumberFormatter {
+  let currencyFormatter = NumberFormatter()
+  currencyFormatter.numberStyle = .currency
+  currencyFormatter.minimumFractionDigits = 0
+  currencyFormatter.positiveSuffix = "M"
+  return currencyFormatter
 }

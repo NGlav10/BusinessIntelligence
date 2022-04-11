@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Tile, SearchBar } from './components';
 import type { Business } from '../sharedTypes';
 import { useFilteredBusinesses } from './utils/hooks';
-import appTheme from '../appTheme';
+import { colors, fontFamily } from '../appTheme';
 import { useNavigation } from '@react-navigation/native';
 
 const Businesses = () => {
@@ -29,7 +29,7 @@ const Businesses = () => {
           <Text style={styles.businessName}>{item.name}</Text>
           <Text style={styles.city}>{item.location.city}</Text>
         </View>
-        <Icon name="angle-right" size={25} color={appTheme.blue} />
+        <Icon name="angle-right" size={25} color={colors.blue} />
       </TouchableOpacity>
     </Tile>
   );
@@ -59,14 +59,15 @@ const Businesses = () => {
 
 const styles = StyleSheet.create({
   businessName: {
-    fontSize: 17,
-    color: appTheme.black,
+    ...fontFamily.header,
+    color: colors.black,
   },
   contentContainerStyle: {
     padding: 8,
   },
   city: {
-    color: appTheme.gray,
+    ...fontFamily.body,
+    color: colors.gray,
   },
   listItemContainer: {
     flexDirection: 'row',
@@ -75,9 +76,9 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   instruction: {
-    fontSize: 17,
-    color: appTheme.black,
-    paddingBottom: 5,
+    ...fontFamily.body,
+    color: colors.white,
+    paddingBottom: 8,
   },
   itemSeparatorComponent: {
     height: 5,
@@ -85,11 +86,11 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     padding: 8,
-    backgroundColor: appTheme.white,
-    borderBottomColor: appTheme.lightGray,
+    backgroundColor: colors.black,
+    borderBottomColor: colors.lightGray,
     borderBottomWidth: 1,
-    shadowColor: appTheme.black,
-    textShadowOffset: { width: 0, height: -5 },
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5,
   },
 });

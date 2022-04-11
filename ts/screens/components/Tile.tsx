@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
-import appTheme from '../../appTheme';
+import { colors } from '../../appTheme';
 
 interface Props {
   children: ReactNode;
@@ -13,11 +13,11 @@ const Tile = (props: Props) => (
 
 const styles = StyleSheet.create({
   tile: {
-    backgroundColor: appTheme.white,
+    backgroundColor: colors.white,
     borderRadius: 8,
-    shadowColor: appTheme.black,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
+    shadowColor: colors.black,
+    shadowOffset: { width: 1, height: -1 },
+    shadowOpacity: 0.2,
   },
 });
 

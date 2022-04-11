@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import appTheme from '../appTheme';
+import { colors, fontFamily } from '../appTheme';
 import { RootStackParamList } from '../navigationTypes';
 import { Revenue } from '../sharedTypes';
 import { Charts, Tile } from './components';
@@ -14,6 +14,7 @@ import { useConstructChartValues } from './utils/hooks';
 type BusinessDetailScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 
 const BusinessDetail = () => {
+  const navigation = useNavigation();
   const {
     params: {
       business: {
@@ -23,6 +24,11 @@ const BusinessDetail = () => {
       },
     },
   } = useRoute<BusinessDetailScreenRouteProp>();
+
+  useEffect(() => {
+    navigation.setOptions({ title: name });
+  }, [name, navigation]);
+
   const { xValues, yValues } = useConstructChartValues(revenue);
 
   const _renderItem = ({ item, index }: { item: Revenue; index: number }) => {
@@ -37,9 +43,9 @@ const BusinessDetail = () => {
 
     return (
       <View style={styles.revenueContainer}>
-        <Text>{formattedDate}</Text>
+        <Text style={fontFamily.body}>{formattedDate}</Text>
         <View style={styles.revenueValueContainer}>
-          <Text>{formattedValue}</Text>
+          <Text style={fontFamily.body}>{formattedValue}</Text>
           <Icon
             name={`angle-double-${iconNameAndColor.name}`}
             color={iconNameAndColor.color}
@@ -57,12 +63,14 @@ const BusinessDetail = () => {
 
   return (
     <>
-      <Tile containerStyle={styles.tileContainerStyle}>
-        <Text style={styles.businessName}>{name}</Text>
-        <Text>{address}</Text>
-        <Text>{city}</Text>
-        <Text>{country}</Text>
-      </Tile>
+      <View style={{ backgroundColor: colors.black }}>
+        <Tile containerStyle={styles.tileContainerStyle}>
+          <Text style={styles.businessName}>{name}</Text>
+          <Text style={styles.address}>{address}</Text>
+          <Text style={styles.address}>{city}</Text>
+          <Text style={styles.address}>{country}</Text>
+        </Tile>
+      </View>
       <View style={styles.chartsContainer}>
         <Charts xValues={xValues} yValues={yValues} style={styles.charts} />
       </View>
@@ -80,18 +88,23 @@ const BusinessDetail = () => {
 };
 
 const styles = StyleSheet.create({
+  address: {
+    ...fontFamily.body,
+    color: colors.gray,
+  },
   businessName: {
+    ...fontFamily.header,
     fontSize: 25,
     paddingBottom: 8,
   },
   charts: {
     height: 300,
-    backgroundColor: appTheme.beige,
+    backgroundColor: colors.beige,
   },
   chartsContainer: {
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: appTheme.black,
+    borderColor: colors.black,
   },
   itemSeparatorComponent: {
     height: 1,
@@ -101,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 15,
-    backgroundColor: appTheme.white,
+    backgroundColor: colors.white,
   },
   revenueIcon: {
     paddingLeft: 5,
