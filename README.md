@@ -13,3 +13,9 @@ If you run into any configuration or build tool issues, feel free to reach out.
 - https://github.com/PhilJay/MPAndroidChart 
 - https://github.com/danielgindi/Charts
 - https://mockaroo.com/ 
+
+#### Setup Instructions
+1. Clone repo
+2. Within the root dir of the project, run `yarn install`
+3. Within the `ios/` dir run pod install
+4. Open XCode and run
