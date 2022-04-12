@@ -59,14 +59,16 @@ const Businesses = () => {
 
 const styles = StyleSheet.create({
   businessName: {
-    ...fontFamily.header,
+    fontFamily: fontFamily.semiBold,
+    fontSize: 20,
     color: colors.black,
   },
   contentContainerStyle: {
     padding: 8,
   },
   city: {
-    ...fontFamily.body,
+    fontFamily: fontFamily.medium,
+    fontSize: 15,
     color: colors.gray,
   },
   listItemContainer: {
@@ -76,7 +78,8 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   instruction: {
-    ...fontFamily.body,
+    fontFamily: fontFamily.regular,
+    fontSize: 20,
     color: colors.white,
     paddingBottom: 8,
   },

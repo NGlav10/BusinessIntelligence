@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { colors } from '../../appTheme';
+import { colors, fontFamily } from '../../appTheme';
 
 interface Props {
   placeholder: string;
@@ -34,19 +34,23 @@ const SearchBar = (props: Props) => {
 const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: colors.lightGray,
-    padding: 8,
     marginBottom: 5,
     borderRadius: 20,
     flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft: 8,
   },
   searchIcon: {
     width: 20,
   },
   searchText: {
-    fontSize: 18,
-    marginLeft: 5,
+    fontFamily: fontFamily.light,
+    fontSize: 20,
+    alignSelf: 'center',
     color: colors.black,
+    paddingVertical: 8,
+    marginLeft: 5,
+    textAlignVertical: 'center',
   },
 });
 export default SearchBar;

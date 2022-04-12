@@ -1,6 +1,7 @@
 import { Business, Revenue } from '../../sharedTypes';
 import data from '../../../data.json';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 interface ReturnType {
   businesses: Business[];
@@ -39,3 +40,12 @@ export const useConstructChartValues = (
 
     return { xValues, yValues };
   }, [revenueArray]);
+
+export const useUpdateHeaderTitle = (title: string) => {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({ title: `${title}` });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]);
+};

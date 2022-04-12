@@ -18,6 +18,7 @@ class RNChartsView: UIView {
     chartView.legend.enabled = false
     chartView.minOffset = 0
     chartView.extraTopOffset = 10
+    chartView.extraRightOffset = 10
     chartView.animate(yAxisDuration: 1.0)
   }
   

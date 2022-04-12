@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import React from 'react';
+import { StyleSheet, View, Text, FlatList, Dimensions } from 'react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { colors, fontFamily } from '../appTheme';
@@ -9,12 +9,11 @@ import { Revenue } from '../sharedTypes';
 import { Charts, Tile } from './components';
 import { formatCurrencyUSD } from './utils/currencyUtils';
 import { formatDate } from './utils/dateUtils';
-import { useConstructChartValues } from './utils/hooks';
+import { useConstructChartValues, useUpdateHeaderTitle } from './utils/hooks';
 
 type BusinessDetailScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 
 const BusinessDetail = () => {
-  const navigation = useNavigation();
   const {
     params: {
       business: {
@@ -24,10 +23,7 @@ const BusinessDetail = () => {
       },
     },
   } = useRoute<BusinessDetailScreenRouteProp>();
-
-  useEffect(() => {
-    navigation.setOptions({ title: name });
-  }, [name, navigation]);
+  useUpdateHeaderTitle(name);
 
   const { xValues, yValues } = useConstructChartValues(revenue);
 
@@ -43,9 +39,9 @@ const BusinessDetail = () => {
 
     return (
       <View style={styles.revenueContainer}>
-        <Text style={fontFamily.body}>{formattedDate}</Text>
+        <Text style={styles.revenue}>{formattedDate}</Text>
         <View style={styles.revenueValueContainer}>
-          <Text style={fontFamily.body}>{formattedValue}</Text>
+          <Text style={styles.revenue}>{formattedValue}</Text>
           <Icon
             name={`angle-double-${iconNameAndColor.name}`}
             color={iconNameAndColor.color}
@@ -81,7 +77,7 @@ const BusinessDetail = () => {
         }
         renderItem={_renderItem}
         ItemSeparatorComponent={_renderItemSeparatorComponent}
-        contentContainerStyle={{ paddingBottom: 40 }}
+        contentContainerStyle={styles.revenueListContainer}
       />
     </>
   );
@@ -89,16 +85,18 @@ const BusinessDetail = () => {
 
 const styles = StyleSheet.create({
   address: {
-    ...fontFamily.body,
+    fontFamily: fontFamily.medium,
+    fontSize: 15,
     color: colors.gray,
   },
   businessName: {
-    ...fontFamily.header,
+    fontFamily: fontFamily.semiBold,
     fontSize: 25,
+    color: colors.black,
     paddingBottom: 8,
   },
   charts: {
-    height: 300,
+    height: Dimensions.get('window').height / 3,
     backgroundColor: colors.beige,
   },
   chartsContainer: {
@@ -110,11 +108,21 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: 'transparent',
   },
+  revenue: {
+    fontFamily: fontFamily.medium,
+    fontSize: 15,
+    color: colors.black,
+  },
   revenueContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    alignContent: 'center',
     padding: 15,
     backgroundColor: colors.white,
+  },
+  revenueListContainer: {
+    paddingBottom: 40,
   },
   revenueIcon: {
     paddingLeft: 5,

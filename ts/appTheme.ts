@@ -8,12 +8,11 @@ export const colors = {
 };
 
 export const fontFamily = {
-  header: {
-    fontSize: 25,
-    fontFamily: 'AppleSDGothicNeo-SemiBold',
-  },
-  body: {
-    fontSize: 20,
-    fontFamily: 'AppleSDGothicNeo-Medium',
-  },
+  bold: 'AppleSDGothicNeo-Bold',
+  light: 'AppleSDGothicNeo-Light',
+  medium: 'AppleSDGothicNeo-Medium',
+  regular: 'AppleSDGothicNeo-Regular',
+  semiBold: 'AppleSDGothicNeo-SemiBold',
+  thin: 'AppleSDGothicNeo-Thin',
+  ultraLight: 'AppleSDGothicNeo-UltraLight',
 };
